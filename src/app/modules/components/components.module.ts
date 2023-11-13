@@ -16,9 +16,9 @@ export const components: any = [
   declarations: components,
   exports: components,
   imports: [
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    CommonModule
-  ]
+  ],
 })
 export class ComponentsModule { }

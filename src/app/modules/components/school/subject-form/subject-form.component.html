@@ -1,9 +1,12 @@
+<h2>{{ editMode ? 'Edit Subject' : 'Add Subject' }}</h2>
 <form [formGroup]="subjectForm" (ngSubmit)="onSubmit()">
     <label for="name">Subject Name:</label>
     <input type="text" id="name" formControlName="name" />
   
+    <br />
     <label for="teacher">Teacher Name:</label>
     <input type="text" id="teacher" formControlName="teacher" />
   
+    <br />
     <button type="submit">{{ editMode ? 'Update' : 'Add' }} Subject</button>
   </form>

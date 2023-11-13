@@ -28,7 +28,7 @@ export class SubjectFormComponent {
     }
   }
 
-  subjectForm: FormGroup;
+  subjectForm!: FormGroup;
   editMode = false;
 
   constructor() {

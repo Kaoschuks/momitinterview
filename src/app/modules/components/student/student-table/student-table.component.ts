@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { Observable } from 'rxjs';
+import { IStudent } from 'src/app/core';
 
 @Component({
   selector: 'app-student-table',
@@ -8,5 +10,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class StudentTableComponent {
 
-  @Input() studentData: Array<any> = []
+  @Input() studentData$!: Observable<IStudent[]>
+  @Output() ondelete = new EventEmitter();
+  @Output() onedit = new EventEmitter();
 }

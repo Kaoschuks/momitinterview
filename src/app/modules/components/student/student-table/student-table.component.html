@@ -1,1 +1,30 @@
-<p>student-table works!</p>
+<h2>Student Table</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Student ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Enrolled Subjects</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let student of studentData$ | async">
+      <td>{{ student.id }}</td>
+      <td>{{ student.firstName }}</td>
+      <td>{{ student.lastName }}</td>
+      <td>
+        <ul>
+          <li *ngFor="let subjectId of student.enrolledSubjects">{{ subjectId }}</li>
+        </ul>
+      </td>
+      <td>
+        <button (click)="onedit.emit(student)">Edit</button>
+      </td>
+      <td>
+        <button (click)="ondelete.emit(student)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

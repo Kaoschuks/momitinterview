@@ -10,7 +10,7 @@ import { ISubject } from 'src/app/core';
 })
 export class SubjectTableComponent {
 
-  @Input() subjectData: Observable<ISubject[]> | undefined
+  @Input() subjectData!: Observable<ISubject[]>
   @Output() ondelete = new EventEmitter();
   @Output() onedit = new EventEmitter();
 }
