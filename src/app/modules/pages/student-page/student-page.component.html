@@ -1,4 +1,4 @@
 
 
-<app-student-form></app-student-form>
-<app-student-table></app-student-table>
+<app-student-form (saveStudent)="addStudentData($event)" (editStudent)="updateStudentData($event)" [student]="studentData" [subjectData]="subjects$"></app-student-form>
+<app-student-table (ondelete)="deleteStudentData($event)" (onedit)="studentData = $event" [studentData$]="students$"></app-student-table>

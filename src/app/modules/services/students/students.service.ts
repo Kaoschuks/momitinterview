@@ -15,7 +15,9 @@ export class StudentService {
   }
 
   addStudent(student: IStudent): Observable<void> {
-    this.students.push(student);
+    const arr = [...this.students]
+    arr.push(student);
+    this.students = arr;
     this.updateStudentList();
     return new Observable((observer) => {
       observer.next();
@@ -26,7 +28,9 @@ export class StudentService {
   updateStudent(updatedStudent: IStudent): Observable<void> {
     const index = this.students.findIndex((s) => s.id === updatedStudent.id);
     if (index !== -1) {
-      this.students[index] = updatedStudent;
+      const arr = [...this.students]
+      arr[index] = updatedStudent;
+      this.students = arr
       this.updateStudentList();
     }
     return new Observable((observer) => {
