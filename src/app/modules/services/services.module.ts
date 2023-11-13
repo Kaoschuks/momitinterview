@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SubjectService } from './subject/subject.service';
 import { HttpClientModule } from '@angular/common/http';
+import { StudentService } from './students/students.service';
 
 export const services = [
-  SubjectService
+  SubjectService, StudentService
 ]
 
 @NgModule({
