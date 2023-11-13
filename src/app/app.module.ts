@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
@@ -8,8 +10,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { ServicesModule, PagesModule } from './modules';
 import { CoreComponentsModule } from './core';
-import { SubjectEffects, subjectReducer } from './shared';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SubjectEffects, StudentEffects, studentReducer, subjectReducer } from './shared';
 
 @NgModule({
   declarations: [
@@ -17,14 +18,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
     StoreModule.forRoot({
-      subject: subjectReducer 
+      subject: subjectReducer,
+      student: studentReducer
     }),
     EffectsModule.forRoot([
-      SubjectEffects
+      SubjectEffects, StudentEffects
     ]),
     CoreComponentsModule,
     ServicesModule, PagesModule
