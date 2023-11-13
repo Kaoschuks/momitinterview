@@ -1,2 +1,3 @@
-<p>subject-page works!</p>
-<app-subject-table (ondelete)="deleteSubject($event)" [subjectData]="subjects"></app-subject-table>
+
+<app-subject-form></app-subject-form>
+<app-subject-table (onedit)="subjectData = $event" (ondelete)="deleteSubject($event)" [subjectData]="subjects$"></app-subject-table>

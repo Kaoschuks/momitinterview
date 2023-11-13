@@ -1,53 +1,54 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ISubject } from 'src/app/core';
-
-const SUBJECTS_KEY = 'subjects';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SubjectService {
-  private subjects: ISubject[] = [];
+  private subjects: ISubject[] = [
+    { id: 1, name: 'Math', teacher: 'Mr. Smith' },
+    { id: 2, name: 'Science', teacher: 'Ms. Johnson' },
+    { id: 3, name: 'History', teacher: 'Mr. Davis' },
+  ];
 
-  constructor() {
-    this.loadSubjectsFromStorage();
+  private subjectList$: BehaviorSubject<ISubject[]> = new BehaviorSubject<ISubject[]>(this.subjects);
+
+  getSubjects(): Observable<ISubject[]> {
+    return this.subjectList$.asObservable();
   }
 
-  private loadSubjectsFromStorage(): void {
-    const storedSubjects = localStorage.getItem(SUBJECTS_KEY);
-    if (storedSubjects) {
-      this.subjects = JSON.parse(storedSubjects);
-    }
-  }
-
-  getSubjects(): ISubject[] {
-    return this.subjects;
-  }
-
-  addSubject(subject: ISubject): void {
-    subject.id = this.generateId();
+  addSubject(subject: ISubject): Observable<void> {
     this.subjects.push(subject);
-    this.saveSubjectsToStorage();
+    this.updateSubjectList();
+    return new Observable((observer) => {
+      observer.next();
+      observer.complete();
+    });
   }
 
-  updateSubject(updatedSubject: ISubject): void {
+  updateSubject(updatedSubject: ISubject): Observable<void> {
     const index = this.subjects.findIndex((s) => s.id === updatedSubject.id);
     if (index !== -1) {
       this.subjects[index] = updatedSubject;
-      this.saveSubjectsToStorage();
+      this.updateSubjectList();
     }
+    return new Observable((observer) => {
+      observer.next();
+      observer.complete();
+    });
   }
 
-  deleteSubject(subjectId: number): void {
+  deleteSubject(subjectId: number): Observable<void> {
     this.subjects = this.subjects.filter((s) => s.id !== subjectId);
-    this.saveSubjectsToStorage();
+    this.updateSubjectList();
+    return new Observable((observer) => {
+      observer.next();
+      observer.complete();
+    });
   }
 
-  private generateId(): number {
-    return this.subjects.length > 0 ? Math.max(...this.subjects.map((s) => s.id)) + 1 : 1;
-  }
-
-  private saveSubjectsToStorage(): void {
-    localStorage.setItem(SUBJECTS_KEY, JSON.stringify(this.subjects));
+  private updateSubjectList(): void {
+    this.subjectList$.next([...this.subjects]);
   }
 }

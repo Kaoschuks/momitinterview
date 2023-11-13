@@ -8,6 +8,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { ServicesModule, PagesModule } from './modules';
 import { CoreComponentsModule } from './core';
+import { SubjectEffects, subjectReducer } from './shared';
 
 @NgModule({
   declarations: [
@@ -16,8 +17,12 @@ import { CoreComponentsModule } from './core';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([]),
+    StoreModule.forRoot({
+      subject: subjectReducer 
+    }),
+    EffectsModule.forRoot([
+      SubjectEffects
+    ]),
     CoreComponentsModule,
     ServicesModule, PagesModule
   ],
