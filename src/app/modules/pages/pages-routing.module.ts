@@ -1,16 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SubjectPageComponent } from './subject-page/subject-page.component';
+import { StudentPageComponent } from './student-page/student-page.component';
 
-const routes: Routes = [
+export const routes: Routes = [
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'subjects',
+  },
   {
     path: 'subjects',
     component: SubjectPageComponent,
   },
   {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'subjects',
+    path: 'students',
+    component: StudentPageComponent,
   },
 ];
 
