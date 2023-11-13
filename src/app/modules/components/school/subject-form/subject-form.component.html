@@ -1,1 +1,9 @@
-<p>subject-form works!</p>
+<form [formGroup]="subjectForm" (ngSubmit)="onSubmit()">
+    <label for="name">Subject Name:</label>
+    <input type="text" id="name" formControlName="name" />
+  
+    <label for="teacher">Teacher Name:</label>
+    <input type="text" id="teacher" formControlName="teacher" />
+  
+    <button type="submit">{{ editMode ? 'Update' : 'Add' }} Subject</button>
+  </form>

@@ -9,6 +9,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { ServicesModule, PagesModule } from './modules';
 import { CoreComponentsModule } from './core';
 import { SubjectEffects, subjectReducer } from './shared';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,8 @@ import { SubjectEffects, subjectReducer } from './shared';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     StoreModule.forRoot({
       subject: subjectReducer 

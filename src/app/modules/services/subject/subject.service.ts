@@ -6,10 +6,10 @@ import { ISubject } from 'src/app/core';
   providedIn: 'root',
 })
 export class SubjectService {
-  private subjects: ISubject[] = [
+  private subjects: Array<ISubject> = [
     { id: 1, name: 'Math', teacher: 'Mr. Smith' },
     { id: 2, name: 'Science', teacher: 'Ms. Johnson' },
-    { id: 3, name: 'History', teacher: 'Mr. Davis' },
+    { id: 3, name: 'History', teacher: 'Mr. Davis' }
   ];
 
   private subjectList$: BehaviorSubject<ISubject[]> = new BehaviorSubject<ISubject[]>(this.subjects);
@@ -19,7 +19,9 @@ export class SubjectService {
   }
 
   addSubject(subject: ISubject): Observable<void> {
-    this.subjects.push(subject);
+    const arr = [...this.subjects]
+    arr.push(subject);
+    this.subjects = arr;
     this.updateSubjectList();
     return new Observable((observer) => {
       observer.next();
@@ -28,9 +30,11 @@ export class SubjectService {
   }
 
   updateSubject(updatedSubject: ISubject): Observable<void> {
-    const index = this.subjects.findIndex((s) => s.id === updatedSubject.id);
+    const index: any = this.subjects.findIndex((s) => s.id === updatedSubject.id);
     if (index !== -1) {
-      this.subjects[index] = updatedSubject;
+      const arr = [...this.subjects]
+      arr[index] = updatedSubject;
+      this.subjects = arr;
       this.updateSubjectList();
     }
     return new Observable((observer) => {

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ISubject } from 'src/app/core';
 
@@ -10,8 +10,10 @@ import { ISubject } from 'src/app/core';
 })
 export class SubjectFormComponent {
 
-  @Output() onsubmit = new EventEmitter();
+  private fb: FormBuilder = inject(FormBuilder);
 
+  @Output() saveSubject = new EventEmitter();
+  @Output() editSubject = new EventEmitter();
   @Input() set subject(value: ISubject | null) {
     if (value) {
       this.editMode = true;
@@ -29,7 +31,7 @@ export class SubjectFormComponent {
   subjectForm: FormGroup;
   editMode = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor() {
     this.subjectForm = this.fb.group({
       id: [null],
       name: ['', Validators.required],
@@ -37,22 +39,19 @@ export class SubjectFormComponent {
     });
   }
 
-  // onSubmit(): void {
-  //   if (this.subjectForm.valid) {
-  //     const formData = this.subjectForm.value;
-  //     const newSubject: Subject = {
-  //       id: formData.id || 0,
-  //       name: formData.name,
-  //       teacher: formData.teacher,
-  //     };
+  onSubmit(): void {
+    if (this.subjectForm.valid) {
+      const formData = this.subjectForm.value;
+      const subject: ISubject = {
+        id: formData.id || 0,
+        name: formData.name,
+        teacher: formData.teacher,
+      };
 
-  //     if (this.editMode) {
-  //       this.subjectService.updateSubject(newSubject);
-  //     } else {
-  //       this.subjectService.addSubject(newSubject);
-  //     }
+      if (this.editMode) this.editSubject.emit(subject)
+      if (!this.editMode) this.saveSubject.emit(subject)
 
-  //     this.subjectForm.reset();
-  //   }
-  // }
+      this.subjectForm.reset();
+    }
+  }
 }

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { SubjectState, deleteSubject, loadSubjects } from 'src/app/shared';
+import { SubjectState, addSubject, deleteSubject, loadSubjects, updateSubject } from 'src/app/shared';
 
 export const getSubjectState = createFeatureSelector<SubjectState>('subject');
 export const getSubjects = createSelector(getSubjectState, (state) => state.subjects);
@@ -20,11 +20,23 @@ export class SubjectPageComponent implements OnInit {
 
   subjectData!: ISubject
   subjects$!: Observable<ISubject[]>;
-  private store: Store = inject(Store);
+  store: Store = inject(Store);
 
   ngOnInit(): void {
     this.store.dispatch(loadSubjects());
     this.subjects$ = this.store.select(getSubjects);
+  }
+  
+  updateSubjectData(subject: ISubject) {
+    this.store.dispatch(updateSubject({
+      subject: subject,
+    }))
+  }
+  
+  addSubjectData(subject: ISubject) {
+    this.store.dispatch(addSubject({
+      subject: subject,
+    }))
   }
   
   deleteSubject(subject: ISubject) {

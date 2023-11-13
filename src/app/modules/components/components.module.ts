@@ -4,6 +4,7 @@ import { StudentFormComponent } from './student/student-form/student-form.compon
 import { StudentTableComponent } from './student/student-table/student-table.component';
 import { SubjectFormComponent } from './school/subject-form/subject-form.component';
 import { SubjectTableComponent } from './school/subject-table/subject-table.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 export const components: any = [
   SubjectFormComponent, SubjectTableComponent,
@@ -15,6 +16,8 @@ export const components: any = [
   declarations: components,
   exports: components,
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     CommonModule
   ]
 })
