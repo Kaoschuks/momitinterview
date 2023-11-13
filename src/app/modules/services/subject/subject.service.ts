@@ -1,16 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ISubject } from 'src/app/core';
+import { ISubject, dummysubjects } from 'src/app/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SubjectService {
-  private subjects: Array<ISubject> = [
-    { id: 1, name: 'Math', teacher: 'Mr. Smith' },
-    { id: 2, name: 'Science', teacher: 'Ms. Johnson' },
-    { id: 3, name: 'History', teacher: 'Mr. Davis' }
-  ];
+  private subjects: Array<ISubject> = dummysubjects
 
   private subjectList$: BehaviorSubject<ISubject[]> = new BehaviorSubject<ISubject[]>(this.subjects);
 
