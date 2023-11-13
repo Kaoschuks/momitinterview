@@ -1,0 +1,3 @@
+
+<app-subject-form (editSubject)="updateSubjectData($event)" (saveSubject)="addSubjectData($event)" [subject]="subjectData"></app-subject-form>
+<app-subject-table (onedit)="subjectData = $event" (ondelete)="deleteSubject($event)" [subjectData]="subjects$"></app-subject-table>
