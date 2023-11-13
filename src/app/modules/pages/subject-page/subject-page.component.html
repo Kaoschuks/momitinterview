@@ -1,2 +1,2 @@
 <p>subject-page works!</p>
-<app-subject-table></app-subject-table>
+<app-subject-table (ondelete)="deleteSubject($event)" [subjectData]="subjects"></app-subject-table>
