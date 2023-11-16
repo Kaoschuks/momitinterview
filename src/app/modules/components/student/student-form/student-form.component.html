@@ -1,0 +1,18 @@
+<h2>{{ editMode ? 'Edit Student' : 'Add Student' }}</h2>
+<form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+  <label for="firstName">First Name:</label>
+  <input type="text" id="firstName" formControlName="firstName" />
+
+  <br />
+  <label for="lastName">Last Name:</label>
+  <input type="text" id="lastName" formControlName="lastName" />
+
+  <br />
+  <label for="enrolledSubjects">Enrolled Subjects:</label>
+  <select multiple id="enrolledSubjects" formControlName="enrolledSubjects">
+    <option *ngFor="let subject of subjectData | async" [value]="subject.id">{{ subject?.name  | titlecase }}</option>
+  </select>
+
+  <br />
+  <button type="submit">{{ editMode ? 'Update' : 'Add' }} Student</button>
+</form>
